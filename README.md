@@ -19,7 +19,7 @@ also contain a "common" or "shared" folder for server rendering.
 ## client
 - **components**: All global components used across layouts
 - **containers**: All global containers used across layouts
-- **layouts**: Each layout is by definition a container which encapsulates other containers and components specific to that layout. Each layout also has a route file specific to it, which allows dynamic route loading with React Router.
+- **layouts**: Each layout is by definition a container which encapsulates other containers and components specific to that layout. Each layout also has a route file specific to it.
   - **components**: All components used across screens but not outside of this layout
   - **containers**: All containers used across screens but not outside of this layout
   - **screens**: Each screen is by definition a container which encapsulates components specific to that screen.

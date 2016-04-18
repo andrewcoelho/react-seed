@@ -6,6 +6,6 @@ export default {
   component: Dashboard,
   indexRoute: { onEnter: (nextState, replace) => replace('/inbox') },
   childRoutes: [
-    { path: '/posts', component: Inbox }
-  ]
+    { path: '/posts', component: Inbox },
+  ],
 };
