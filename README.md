@@ -5,18 +5,20 @@ and more of a suggested directory structure that I've found scales well. It curr
 uses the following:
 
 * React
+* React Router
 * Redux
-* Redux-saga
+* Redux-Saga
 * ES6/7
-* Hot Reloading
-* Webpack
-* Nodemon
+* React Hot Loader 3
+* Webpack 2
 
-## src
-The "src" folder contains all client and server code. In a universal app this could
-also contain a "common" or "shared" folder for server rendering.
+This is by no means prescriptive. Many projects will not require more complex state management tools like Redux. Some will not require a routing library like React Router. These libraries are included by default only because they are what I most often end up using in my more complex projects.
 
-## client
+By default, some errors will be displayed when you start this for the first time. This is because I did not want to go the way of many other boilerplates and fill in a bunch of components, containers, reducers, etc. just to show that it works. Instead I wanted a repo I could clone when starting a new project, with a sensible directory structure I've found works well for me, in which I could go through minimal deletion steps before getting started.
+
+I've outlined my reasoning for the directory structure below.
+
+## app
 - **components**: All global components used across layouts
 - **containers**: All global containers used across layouts
 - **layouts**: Each layout is by definition a container which encapsulates other containers and components specific to that layout. Each layout also has a route file specific to it.
@@ -34,10 +36,8 @@ also contain a "common" or "shared" folder for server rendering.
   - **sagas**: sagas specific to this module
 - **store**: Global store configuration for Redux
 - **index.js**: Entry point of the app where React DOM's render method is called
-- **RootComponent**: Root Component for the app (this may not be necessary)
+- **Root**: Created to facilitate integration with the new React Hot Loader API. Simply wraps a typical Redux + React Router root component into one export.
+- **RootComponent**: Root Component for the app where React Router renders from the base route
 - **rootReducer**: Where you combine all reducers using Redux's combineReducers method
 - **rootRoute**: Root route configuration for React Router
 - **rootSaga**: Fork all your sagas into a root saga to be passed as Redux middleware
-
-## Future Improvements
-I'd like to abstract this out more to more easily allow for integration of alternative side-effect libraries like Redux Thunk.

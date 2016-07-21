@@ -1,16 +1,14 @@
 import React from 'react';
-import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import routes from './rootRoute';
 import configureStore from './store/configureStore';
+import routes from './rootRoute';
 
-const initialState = {};
+const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState);
 
-render(
+export default () => (
   <Provider store={store}>
     <Router routes={routes} history={browserHistory} />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 );
