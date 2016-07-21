@@ -1,42 +1,59 @@
-import path from 'path';
-import webpack from 'webpack';
+const path = require('path');
+const webpack = require('webpack');
 
-const ROOT = path.resolve(__dirname, '..');
-const SRC_DIR = path.resolve(__dirname, '..', 'src');
+const APP_DIR = path.resolve(__dirname, '..', 'app');
 const DIST_DIR = path.resolve(__dirname, '..', 'dist');
-const CLIENT_DIR = path.resolve(SRC_DIR, 'client');
 
-export default {
-  devtool: 'inline-source-map',
-  entry: [
-    'babel-polyfill',
-    'webpack-hot-middleware/client',
-    path.resolve(CLIENT_DIR, 'index.js')
-  ],
+module.exports = {
+  devtool: 'eval',
+  entry: {
+    app: [
+      'babel-polyfill',
+      'webpack-dev-server/client?http://localhost:3000',
+      'webpack/hot/only-dev-server',
+      'react-hot-loader/patch',
+      path.resolve(APP_DIR, 'index.js'),
+    ],
+    vendor: [
+      'react',
+      'react-dom',
+      'react-redux',
+      'react-router',
+      'redux',
+      'redux-saga',
+    ],
+  },
   output: {
     path: DIST_DIR,
-    filename: 'bundle.js',
-    publicPath: '/static/'
+    filename: '[name].js',
+    publicPath: '/static/',
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
         loader: 'babel',
-        include: SRC_DIR
-      }
-    ]
+        include: APP_DIR,
+      },
+    ],
   },
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity,
+      filename: 'vendor.bundle.js',
+    }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"development"'
+      'process.env.NODE_ENV': '"development"',
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
   ],
   resolve: {
     alias: {
-      reduxModules: path.resolve(CLIENT_DIR, 'reduxModules')
-    }
-  }
+      components: path.resolve(APP_DIR, 'components'),
+      containers: path.resolve(APP_DIR, 'containers'),
+      layouts: path.resolve(APP_DIR, 'layouts'),
+      reduxModules: path.resolve(APP_DIR, 'reduxModules'),
+    },
+  },
 };
