@@ -1,18 +1,15 @@
-const path = require('path');
-const webpack = require('webpack');
+import { resolve } from 'path';
+import webpack from 'webpack';
 
-const APP_DIR = path.resolve(__dirname, '..', 'app');
-const DIST_DIR = path.resolve(__dirname, '..', 'dist');
-
-module.exports = {
+export default {
   devtool: 'eval',
   entry: {
     app: [
-      'babel-polyfill',
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
       'react-hot-loader/patch',
-      path.resolve(APP_DIR, 'index.js'),
+      'babel-polyfill',
+      resolve(__dirname, 'app/index.jsx'),
     ],
     vendor: [
       'react',
@@ -24,16 +21,16 @@ module.exports = {
     ],
   },
   output: {
-    path: DIST_DIR,
+    path: resolve(__dirname, 'dist'),
     filename: '[name].js',
     publicPath: '/static/',
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js$/,
-        loader: 'babel',
-        include: APP_DIR,
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+        include: resolve(__dirname, 'app'),
       },
     ],
   },
@@ -49,11 +46,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
   ],
   resolve: {
-    alias: {
-      components: path.resolve(APP_DIR, 'components'),
-      containers: path.resolve(APP_DIR, 'containers'),
-      layouts: path.resolve(APP_DIR, 'layouts'),
-      reduxModules: path.resolve(APP_DIR, 'reduxModules'),
-    },
+    extensions: ['.js', '.jsx'],
+    modules: [
+      resolve('./app'),
+      resolve('./node_modules'),
+    ],
   },
 };

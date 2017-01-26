@@ -1,29 +1,30 @@
+/* eslint-disable global-require */
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from '../rootReducer';
-import rootSaga from '../rootSaga';
+import rootReducer from 'reducers/root';
+import rootSaga from 'sagas/root';
 
 const sagaMiddleware = createSagaMiddleware();
 
-export default function configureStore(initialState) {
+export default (initialState) => {
   const store = createStore(
     rootReducer,
     initialState,
     compose(
       applyMiddleware(sagaMiddleware),
-      window.devToolsExtension ? window.devToolsExtension() : f => f
-    )
+    ),
   );
 
   sagaMiddleware.run(rootSaga);
 
   if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('../rootReducer', () => {
-      const nextReducer = require('../rootReducer').default;
+    // Enable webpack hot module replacement for reducers
+    module.hot.accept('reducers/root', () => {
+      const nextReducer = require('reducers/root').default;
+
       store.replaceReducer(nextReducer);
     });
   }
 
   return store;
-}
+};
