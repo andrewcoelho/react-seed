@@ -1,9 +1,10 @@
 {
   "name": "react-seed",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Initial directory structure and package.json as a seed for new React based projects.",
   "scripts": {
-    "start": "cross-env NODE_ENV=development node devServer.js"
+    "dev": "webpack-dev-server --inline --hot --env.dev",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -27,28 +28,30 @@
   "author": "Andrew Coelho <info@andrewcoelho.com> (http://andrewcoelho.com)",
   "license": "MIT",
   "devDependencies": {
-    "babel-eslint": "^6.1.2",
-    "babel-loader": "^6.2.4",
-    "babel-polyfill": "^6.9.1",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.11.1",
-    "babel-preset-stage-0": "^6.5.0",
-    "babel-register": "^6.9.0",
-    "cross-env": "^2.0.0",
-    "eslint": "^3.1.1",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-react": "^5.2.2",
-    "react-hot-loader": "^3.0.0-beta.2",
-    "webpack": "^2.1.0-beta.7",
-    "webpack-dev-server": "^2.1.0-beta.0"
+    "babel-core": "^6.22.1",
+    "babel-eslint": "7.1.1",
+    "babel-loader": "6.2.10",
+    "babel-polyfill": "6.22.0",
+    "babel-preset-es2015": "6.22.0",
+    "babel-preset-react": "6.22.0",
+    "babel-preset-stage-0": "6.22.0",
+    "babel-register": "6.22.0",
+    "eslint": "3.14.1",
+    "eslint-config-airbnb": "14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "6.9.0",
+    "webpack": "2.2.0",
+    "webpack-dev-server": "2.2.0"
   },
   "dependencies": {
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1",
-    "react-redux": "^4.4.5",
-    "react-router": "^2.6.0",
-    "redux": "^3.5.2",
-    "redux-saga": "^0.11.0"
+    "react": "15.4.2",
+    "react-dom": "15.4.2",
+    "react-hot-loader": "3.0.0-beta.6",
+    "react-redux": "5.0.2",
+    "react-router": "4.0.0-alpha.6",
+    "redux": "3.6.0",
+    "redux-saga": "0.14.3"
   },
   "babel": {
     "presets": [
@@ -64,7 +67,9 @@
     "parser": "babel-eslint",
     "extends": "airbnb",
     "rules": {
-      "prefer-template": 0
+      "import/no-unresolved": 0,
+      "import/no-extraneous-dependencies": 0,
+      "import/extensions": 0
     }
   }
 }

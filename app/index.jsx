@@ -1,22 +1,23 @@
+/* global document */
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import Root from './Root';
+import App from 'containers/App.jsx';
 
 render(
   <AppContainer>
-    <Root />
+    <App />
   </AppContainer>,
-  document.getElementById('root')
+  document.getElementById('mount'),
 );
 
 if (module.hot) {
-  module.hot.accept('./Root'.default, () => {
+  module.hot.accept('containers/App'.default, () => {
     render(
       <AppContainer>
-        <Root />
+        <App />
       </AppContainer>,
-      document.getElementById('root')
+      document.getElementById('mount'),
     );
   });
 }
