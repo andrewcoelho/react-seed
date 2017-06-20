@@ -2,13 +2,13 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import App from 'containers/App.jsx';
+import App from 'containers/App';
 
 render(
   <AppContainer>
     <App />
   </AppContainer>,
-  document.getElementById('mount'),
+  document.getElementById('mount')
 );
 
 if (module.hot) {
@@ -17,7 +17,7 @@ if (module.hot) {
       <AppContainer>
         <App />
       </AppContainer>,
-      document.getElementById('mount'),
+      document.getElementById('mount')
     );
   });
 }

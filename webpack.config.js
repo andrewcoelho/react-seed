@@ -1,7 +1,7 @@
-import { resolve } from 'path';
-import webpack from 'webpack';
+const { resolve } = require('path');
+const webpack = require('webpack');
 
-export default {
+module.exports = {
   devtool: 'eval',
   entry: {
     app: [
@@ -9,7 +9,7 @@ export default {
       'webpack/hot/only-dev-server',
       'react-hot-loader/patch',
       'babel-polyfill',
-      resolve(__dirname, 'app/index.jsx'),
+      resolve(__dirname, 'app/index.js'),
     ],
     vendor: [
       'react',
@@ -28,7 +28,7 @@ export default {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js$/,
         loader: 'babel-loader',
         include: resolve(__dirname, 'app'),
       },
@@ -46,7 +46,6 @@ export default {
     new webpack.HotModuleReplacementPlugin(),
   ],
   resolve: {
-    extensions: ['.js', '.jsx'],
     modules: [
       resolve('./app'),
       resolve('./node_modules'),
