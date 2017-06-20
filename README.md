@@ -10,7 +10,7 @@ uses the following:
 * Redux-Saga
 * ES6/7
 * React Hot Loader 3
-* Webpack 2
+* Webpack 3
 
 This is by no means prescriptive. Many projects will not require more complex state management tools like Redux. Some will not require a routing library like React Router. These libraries are included by default only because they are what I most often end up using in my more complex projects.
 
